@@ -1,0 +1,39 @@
+---
+title: "R Markdown Presentation & Plotly"
+author: "Juan Manuel Tonello"
+date: "may 26, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+```
+
+## Scatter Plot
+- Marker color set according to number of cilinders.
+- Marker size proportional to horse power.
+- Custom tooltips.
+```{r scatter, warning=FALSE}
+text <- paste(row.names(mtcars),
+              paste("weigth:", mtcars$wt),
+              paste("mpg:", mtcars$mpg),
+              paste("hp:", mtcars$hp),
+              paste("cyl:", mtcars$cyl),
+              sep='<br />'
+              )
+
+plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers", 
+        color=~factor(cyl), size=~hp, hoverinfo = "text", text = text )
+```
+
+## Heat Map
+```{r heatmap}
+plot_ly (type = 'heatmap' , z = volcano )
+```
+
+## 3D Surface Plot
+- Drag to rotate plot
+```{r surface}
+plot_ly (type = 'surface' , z = ~volcano )
+```
